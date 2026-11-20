@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-# Main menu and module loading. Compatible with Bash 3.2+.
+#!/bin/bash
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/data_manager.sh"
 source "$SCRIPT_DIR/timetable.sh"
@@ -8,7 +7,6 @@ source "$SCRIPT_DIR/reports.sh"
 
 main() {
     init_data || return 1
-    # One interactive session per data directory prevents conflicting writes.
     if ! mkdir "$DATA_DIR/.session_lock" 2>/dev/null; then
         echo "Another session is using this data directory."
         echo "If a session was forcibly stopped, remove $DATA_DIR/.session_lock."
