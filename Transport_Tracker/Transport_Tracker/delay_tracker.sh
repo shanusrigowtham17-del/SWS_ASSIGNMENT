@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# Delays are manually entered estimates for the current local service date.
+#!/bin/bash
+
 record_delay() {
     local id minutes reason row day stamp tmp
     read -r -p "Service ID: " id || return 1
@@ -14,7 +14,7 @@ record_delay() {
     day=$(date +%F)
     stamp=$(date '+%Y-%m-%dT%H:%M:%S%z')
     tmp=$(mktemp "$DATA_DIR/delays.XXXXXX") || return 1
-    # Keep one latest observation per service per date, and snapshot its route.
+    
     if awk -F, -v d="$day" -v id="$id" 'NR == 1 || !($1 == d && $2 == id)' "$DELAYS" > "$tmp" &&
         printf '%s,%s,%s,%s,%s,%s\n' "$day" "$id" "$minutes" "$reason" "$stamp" "${row#*,}" >> "$tmp" &&
         mv "$tmp" "$DELAYS"; then
