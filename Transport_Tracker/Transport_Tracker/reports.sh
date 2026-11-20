@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-# Summarize the latest saved observation per service per date.
+#!/bin/bash
 write_report() {
     echo "PUBLIC TRANSPORT DELAY REPORT"
     echo "Generated: $(date '+%Y-%m-%d %H:%M:%S %Z')"
